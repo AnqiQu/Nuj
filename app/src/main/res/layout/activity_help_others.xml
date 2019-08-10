@@ -19,21 +19,20 @@
         app:srcCompat="@drawable/logo" />
 
     <ImageButton
-        android:id="@+id/backButton_helpOthers"
+        android:id="@+id/btnBackFromHelpOthers"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:background="@android:color/transparent"
-        android:onClick="toHome"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logo_helpOthers"
         app:srcCompat="@drawable/backbutton" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/lblHelpOthers"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -42,23 +41,22 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/generalButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnGeneral"
         app:layout_constraintEnd_toStartOf="@+id/logo_helpOthers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/helpotherslabel" />
 
     <ImageButton
-        android:id="@+id/eatingDisordersButton"
+        android:id="@+id/btnED"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
         android:background="@android:color/transparent"
-        android:onClick="goToEDHelp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +64,7 @@
         app:srcCompat="@drawable/eatingdisorderhelp" />
 
     <ImageButton
-        android:id="@+id/anxietyButton"
+        android:id="@+id/btnAnxiety"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
@@ -75,15 +73,14 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:onClick="goToAnxietyHelp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/eatingDisordersButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/anxietyhelp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btnDepression"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
@@ -92,15 +89,14 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:onClick="goToDepressionHelp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/anxietyButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnAnxiety"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/depressionhelp" />
 
     <ImageButton
-        android:id="@+id/generalButton"
+        android:id="@+id/btnGeneral"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
@@ -109,9 +105,8 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:onClick="goToGeneralHelp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnDepression"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/generalhelp" />

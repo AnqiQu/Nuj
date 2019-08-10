@@ -23,7 +23,7 @@ public class About extends AppCompatActivity {
         btnFaq = findViewById(R.id.btnFaq);
         btnAboutNuj = findViewById(R.id.btnAboutNuj);
         btnAboutAnqi = findViewById(R.id.btnAboutAnqi);
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.btnBackFromAbout);
 
         // Button click takes user to FAQ acreen
         btnFaq.setOnClickListener(new View.OnClickListener() {

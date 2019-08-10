@@ -81,6 +81,7 @@ public class NewGoal extends AppCompatActivity {
         return description;
     }
 
+    //Gets the current date from the device
     public Date getCurrentDate(){
 
         // Generates the current date
@@ -90,8 +91,10 @@ public class NewGoal extends AppCompatActivity {
         return currentDate;
     }
 
+    //Returns the difficulty of the task that the user has selected on a sliding scale
     public int getDifficulty(){
 
+        //Initiates a sliding bar scale for the difficulty
         difficultySlider = findViewById(R.id.sbDifficulty);
         difficultySlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int difficulty = 3;
@@ -114,6 +117,13 @@ public class NewGoal extends AppCompatActivity {
             }
         });
 
+        //Returns the value of the seekbar scale
         return difficultySlider.getProgress();
     }
+
+    // Presence check on goal description
+    public boolean isPresent(EditText description) {
+        return (description.getText().length() == 0);
+    }
+
 }

@@ -8,25 +8,25 @@ public class Goal {
     private String description;
     private int difficulty;
     private Date start;
+    private Date end;
     private boolean completed;
 
     // Constructor method
-    public Goal(String description, int difficulty) {
+    public Goal(int id, String description, int difficulty, Date start, Date end, boolean completed) {
+        this.id = id;
         this.description = description;
         this.difficulty = difficulty;
-        this.start = new Date();
-    }
-
-    public Goal() {
-
+        this.start = start;
+        this.end = end;
+        this.completed = completed;
     }
 
     // Getter and setter methods
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -52,6 +52,14 @@ public class Goal {
 
     public void setStart(Date start) {
         this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
     public boolean getCompleted() {

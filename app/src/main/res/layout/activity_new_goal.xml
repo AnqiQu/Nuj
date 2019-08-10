@@ -68,7 +68,6 @@
         android:id="@+id/goalDescription"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/background_light"
         android:capitalize="sentences"
@@ -93,5 +92,16 @@
         app:layout_constraintEnd_toEndOf="@+id/goalDescription"
         app:layout_constraintStart_toStartOf="@+id/goalDescription"
         app:layout_constraintTop_toBottomOf="@+id/txtDifficulty" />
+
+    <TextView
+        android:id="@+id/txtDescriptionError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintStart_toStartOf="@+id/goalDescription"
+        app:layout_constraintTop_toBottomOf="@+id/goalDescription" />
 
 </android.support.constraint.ConstraintLayout>

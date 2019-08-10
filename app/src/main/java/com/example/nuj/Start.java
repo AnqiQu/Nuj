@@ -132,4 +132,19 @@ public class Start extends AppCompatActivity {
         return currentDate;
     }
 
+//    // Presence check (used on multiple fields)
+//    public boolean notPresent(JTextField name) {
+//        return (name.getText().isEmpty());
+//    }
+
+//    // Type check (only alpha characters)
+//    public boolean isAlpha(String name) {
+//        return name.matches("[a-zA-Z]+");
+//    }
+
+//    // Logic check on date
+//    public boolean notFuture(LocalDate date) {
+//        return (date.compareTo(LocalDate.now()) < 0);
+//    }
+
 }

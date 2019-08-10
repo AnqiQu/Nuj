@@ -17,7 +17,7 @@ public class User {
 
     private double average;
     private double deviation;
-    private List<Integer> daysTaken;
+    private double recentAverage;
 
     // Constructor method
     public User(String name, Date birthday, Date joinedDate, List<Goal> allGoals, List<Goal> completedGoals, List<Goal> ongoingGoals){
@@ -27,25 +27,44 @@ public class User {
         this.allGoals = allGoals;
         this.completedGoals = completedGoals;
         this.ongoingGoals = ongoingGoals;
-        this.daysTaken = new ArrayList<Integer>(); // TODO: Fix this mess of a daysTaken variable
-        calculateAverage();
-        calculateDeviation();
+        average = calculateAverage(ongoingGoals);
+
+        calculateDeviation(ongoingGoals);
+
+        List<Goal> recentGoals = new ArrayList<>();
+        for (int i = ongoingGoals.size() - 1; i < ongoingGoals.size() - 5; i--){
+            recentGoals.add(ongoingGoals.get(i));
+        }
+        recentAverage = calculateAverage(recentGoals);
     }
 
     // Method to calculate user's average
-    public void calculateAverage(){
+    public double calculateAverage(List<Goal> goalList){
+        List<Integer> daysTaken = new ArrayList<>();
+
+        for(Goal i : goalList){
+            daysTaken.add(daysBetween(i.getStart(), i.getEnd()));
+        }
+
         double total = 0;
 
         for (Integer i : daysTaken){
             total += i;
         }
 
-        average = total / daysTaken.size();
+        return total / daysTaken.size();
     }
 
     // Method to calculate user's deviation from their average
-    public void calculateDeviation(){
+    public void calculateDeviation(List<Goal> goalList){
         double sum = 0.0, standardDeviation = 0.0;
+
+        List<Integer> daysTaken = new ArrayList<>();
+
+        for(Goal i : goalList){
+            daysTaken.add(daysBetween(i.getStart(), i.getEnd()));
+        }
+
         int length = daysTaken.size();
 
         for(double num : daysTaken) {
@@ -61,6 +80,28 @@ public class User {
         deviation = Math.sqrt(standardDeviation/length);
     }
 
+    //Calculates the number of days between 2 dates
+    private static int daysBetween(Date start, Date end) {
+        int difference = (int) (start.getTime()-end.getTime())/86400000;
+        return Math.abs(difference);
+    }
+
+    //Getters for the fields
+    public String getName() {
+        return name;
+    }
+
+    public double getAverage() {
+        return average;
+    }
+
+    public double getDeviation() {
+        return deviation;
+    }
+
+    public double getRecentAverage() {
+        return recentAverage;
+    }
 }
 
 

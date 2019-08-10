@@ -20,19 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/backbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logo_about" />
-
     <ImageView
         android:id="@+id/aboutLabel"
         android:layout_width="0dp"
@@ -101,5 +88,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnBackFromAbout"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/backbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo_about" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.nuj;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import static java.lang.String.valueOf;
 
 public class ManageDatabase extends SQLiteOpenHelper {
 
+    //Declares all the field names in the database as static and final
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "UserGoalsDB";
     private static final String TABLE_NAME = "tblGoals";
@@ -27,13 +29,14 @@ public class ManageDatabase extends SQLiteOpenHelper {
     private static final String KEY_ENDDATE = "EndDate";
     private static final String KEY_COMPLETED = "Completed";
     private static final String[] COLUMNS = { KEY_ID, KEY_DESCRIPTION, KEY_DIFFICULTY,
-            KEY_STARTDATE, KEY_COMPLETED };
+            KEY_STARTDATE, KEY_ENDDATE, KEY_COMPLETED };
 
+    //Constructor method for the class
     ManageDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Creates a new database table
+    // Creates a new database table using SQL
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATION_TABLE = "CREATE TABLE " + TABLE_NAME + " ( "
@@ -55,36 +58,43 @@ public class ManageDatabase extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-
+    //Converts a date from String format to date
     private Date getDate(String day) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy/MM/dd", Locale.getDefault());
         Date date = new Date();
         try {
             date = dateFormat.parse(day);
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+            System.out.println("error");
+        }
         return date;
     }
 
+    //Gets the current date from the device
+    public Date getCurrentDate(){
 
-    public void deleteGoal(Goal goal) {
-        // Get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, "id = ?", new String[] { valueOf(goal.getId()) });
-        db.close();
+        // Generates the current date
+        Date currentDate = Calendar.getInstance().getTime();
+
+        // Returns the current date as a String using the format "yyyy-MM-dd"
+        return currentDate;
     }
 
+    //Creates a goal object using data from the database
+    //Used with the methods that return lists of Goal items
     public Goal newGoal(Cursor cursor) {
-        Goal goal = new Goal();
-        goal.setId(Integer.parseInt(cursor.getString(0)));
-        goal.setDescription(cursor.getString(1));
-        goal.setDifficulty(cursor.getInt(2));
-        goal.setStart(getDate(cursor.getString(3)));
-        goal.setCompleted(cursor.getInt(4) > 0);
+        Goal goal = new Goal(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getInt(2),
+                getDate(cursor.getString(3)),
+                getDate(cursor.getString(4)),
+                cursor.getInt(5) > 0);
 
         return goal;
     }
 
+    //Queries the database for a goal with special primary key using SQL
     public Goal getGoal(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         //Query the database
@@ -106,7 +116,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
         return goal;
     }
 
-
+    //Gets the goal description for a specific goal in the database using SQL
     public String getGoalDescription(int id){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -122,10 +132,8 @@ public class ManageDatabase extends SQLiteOpenHelper {
 
         String output = "";
 
-//        System.out.println(cursor != null);
-//        System.out.println(cursor.moveToFirst());
+        //if the description field contains data
         if (cursor != null && cursor.moveToFirst()) {
-//            System.out.println("Got here");
             int idx = cursor.getColumnIndex(KEY_DESCRIPTION);
             output = cursor.getString(idx);
             cursor.close();
@@ -135,6 +143,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
 
     }
 
+    //Returns a list of all the goals in the database
     public List<Goal> getAllGoals() {
 
         List<Goal> goals = new LinkedList<Goal>();
@@ -152,7 +161,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
         return goals;
     }
 
-
+    //Returns a list of the completed goals in the database
     public List<Goal> getCompletedGoals() {
 
         List<Goal> goals = new LinkedList<>();
@@ -172,7 +181,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
         return goals;
     }
 
-
+    //Returns a list of the incomplete goals in the database
     public List<Goal> getOngoingGoals() {
 
         List<Goal> goals = new LinkedList<>();
@@ -190,7 +199,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
         return goals;
     }
 
-
+    //Adds a goal to the database
     public void addGoal(String description, int difficulty, String startDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -203,6 +212,18 @@ public class ManageDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    //Updates a goal to make it completed
+    public void updateCompleted(Goal goal) {
+        // Get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_ENDDATE, "#" + getCurrentDate().toString() +"#");
+        values.put(KEY_COMPLETED, 1);
+        db.update(TABLE_NAME, values, "id = " + goal.getId(),null);
+        db.close();
+    }
+
+    //Updates a goal in the database (unused for now, for prospective future development)
     public void updateGoal(Goal goal) {
         // Get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -210,9 +231,19 @@ public class ManageDatabase extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, goal.getDescription());
         values.put(KEY_DIFFICULTY, goal.getDifficulty());
         values.put(KEY_STARTDATE, "#" + goal.getStart().toString() +"#");
-        db.update(TABLE_NAME, values, "id = " + String.valueOf(goal.getId()),null);
+        db.update(TABLE_NAME, values, "id = " + goal.getId(),null);
         db.close();
     }
+
+    //Deletes a goal from the database using SQL (unused for now, for prospective future development)
+    public void deleteGoal(Goal goal) {
+        // Get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, "id = ?", new String[] { valueOf(goal.getId()) });
+        db.close();
+    }
+
+
 
 
 }

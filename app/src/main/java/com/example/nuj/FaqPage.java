@@ -1,7 +1,6 @@
 package com.example.nuj;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,7 @@ public class FaqPage extends AppCompatActivity {
 
         // Links textviews and buttons to their corresponding views in the GUI
         questions = new TextView[]{findViewById(R.id.Q1), findViewById(R.id.Q2), findViewById(R.id.Q3), findViewById(R.id.Q3), findViewById(R.id.Q4), findViewById(R.id.Q5)};
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.btnBackFromFAQs);
 
         //Sets the questions using the array of questions
         for (int i = 0; i < 4; i++) {
