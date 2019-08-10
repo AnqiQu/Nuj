@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     ListView goalsListView;
 
+    private ManageDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Accesses the user's data and goals from the user text file and goals database
         ManageTextFile textFile = new ManageTextFile();
         textFile.readUserInfo(this);
-        ManageDatabase db = new ManageDatabase(this);
+        db = new ManageDatabase(this);
 
         //Creates an ArrayList of all the ongoing goals using data from the database
         ArrayList<String> goalList = new ArrayList<>();
@@ -56,23 +58,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set the RecyclerView to its corresponding view
-//        goalsListView = findViewById(R.id.goalsListView);
-//
-////        // Set the layout for the RecyclerView to be a linear layout, which measures and positions items within a RecyclerView into a linear list
-////        goalsListView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        // Initialize the adapter and attach it to the RecyclerView
-//        if (mAdapter == null) {
-//            mAdapter = new ArrayAdapter<>(this,
-//                R.layout.list_item, // what view to use for the items
-//                goalList); // where to get all the data
-//
-//            goalsListView.setAdapter(mAdapter); // set it as the adapter of the ListView instance
-//        } else {
-//            mAdapter.clear();
-//            mAdapter.addAll(goalList);
-//            mAdapter.notifyDataSetChanged();
-//        }
+        goalsListView = findViewById(R.id.goalsListView);
+
+//        // Set the layout for the RecyclerView to be a linear layout, which measures and positions items within a RecyclerView into a linear list
+//        goalsListView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Initialize the adapter and attach it to the RecyclerView
+        if (mAdapter == null) {
+            mAdapter = new ArrayAdapter<>(this,
+                R.layout.list_item, // what view to use for the items
+                goalList); // where to get all the data
+
+            goalsListView.setAdapter(mAdapter); // set it as the adapter of the ListView instance
+        } else {
+            mAdapter.clear();
+            mAdapter.addAll(goalList);
+            mAdapter.notifyDataSetChanged();
+        }
 
 
 
@@ -188,6 +190,21 @@ public class MainActivity extends AppCompatActivity {
     // Stops the user from navigating back to the login screen
     @Override
     public void onBackPressed() {
+    }
+
+    // Reloads the goal list
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ArrayList<String> goalList = new ArrayList<>();
+        for (int i = 1; i <= db.getOngoingGoals().size(); i++) {
+            goalList.add(db.getGoalDescription(i));
+        }
+
+        mAdapter.clear();
+        mAdapter.addAll(goalList);
+        mAdapter.notifyDataSetChanged();
     }
 
 }

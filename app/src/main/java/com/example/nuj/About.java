@@ -62,7 +62,7 @@ public class About extends AppCompatActivity {
 
     // Launches the Faq Page screen
     public void toFaqPage(){
-        Intent intent = new Intent(this, AboutAnqi.class);
+        Intent intent = new Intent(this, FaqPage.class);
         startActivity(intent);
     }
 

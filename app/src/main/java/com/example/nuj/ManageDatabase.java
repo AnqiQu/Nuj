@@ -110,23 +110,26 @@ public class ManageDatabase extends SQLiteOpenHelper {
     public String getGoalDescription(int id){
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String output = null;
         //Query the database
         Cursor cursor = db.query(TABLE_NAME,
                 new String[] {KEY_DESCRIPTION},
-                null,
+                "id = ?",
                 new String[] { valueOf(id) },
                 null,
                 null,
                 null,
                 null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
+        String output = "";
 
-        int idx = cursor.getColumnIndex(KEY_DESCRIPTION);
-        output = cursor.getString(idx);
+//        System.out.println(cursor != null);
+//        System.out.println(cursor.moveToFirst());
+        if (cursor != null && cursor.moveToFirst()) {
+//            System.out.println("Got here");
+            int idx = cursor.getColumnIndex(KEY_DESCRIPTION);
+            output = cursor.getString(idx);
+            cursor.close();
+        }
 
         return output;
 
