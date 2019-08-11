@@ -20,25 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <ImageView
-        android:id="@+id/aboutLabel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/aboutlabel"
-        app:layout_constraintBottom_toTopOf="@+id/btnFaq"
-        app:layout_constraintEnd_toStartOf="@+id/logo_about"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/aboutlabel" />
-
     <ImageButton
         android:id="@+id/btnFaq"
         android:layout_width="0dp"
@@ -101,5 +82,26 @@
         android:src="@drawable/backbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logo_about" />
+
+    <TextView
+        android:id="@+id/lblAbout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="About"
+        android:textColor="@color/colorAccent"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/quicksand"
+        app:layout_constraintBottom_toTopOf="@+id/btnFaq"
+        app:layout_constraintEnd_toStartOf="@+id/logo_about"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

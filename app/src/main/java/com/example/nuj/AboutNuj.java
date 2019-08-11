@@ -35,7 +35,7 @@ public class AboutNuj extends AppCompatActivity {
         readDescription();
 
         //Links the back button to the goBack() method
-        btnBack.setOnClickListener(new View.OnClickListener(){
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goBack();
@@ -45,13 +45,12 @@ public class AboutNuj extends AppCompatActivity {
 
     //Reads the questions and answers from the text file and saves the data into 2D array
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void readDescription(){
+    public void readDescription() {
 
         String text = "";
         try {
-            text = new String ( Files.readAllBytes(Paths.get(ABOUT_NUJ_TXT) ));
-        }
-        catch (IOException e) {
+            text = new String(Files.readAllBytes(Paths.get(ABOUT_NUJ_TXT)));
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -60,7 +59,7 @@ public class AboutNuj extends AppCompatActivity {
     }
 
     //Takes the user back to the previous screen
-    public void goBack(){
+    public void goBack() {
         this.finish();
     }
 }

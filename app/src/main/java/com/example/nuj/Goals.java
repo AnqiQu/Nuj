@@ -1,8 +1,8 @@
 package com.example.nuj;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -33,30 +33,30 @@ public class Goals extends AppCompatActivity {
 
         // Button click allows user to add a new goal
         btnNewGoal2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toNewGoal();
             }
         });
         btnBackFromGoals.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 goBack();
             }
         });
     }
 
     // Links button to New Goal screen
-    public void toNewGoal(){
+    public void toNewGoal() {
         Intent intent = new Intent(this, NewGoal.class);
         startActivity(intent);
     }
 
     //Takes the user back to the home screen
-    public void goBack(){
+    public void goBack() {
         this.finish();
     }
 
     //Method displays all the user's goals
-    public void displayGoals(){
+    public void displayGoals() {
         // Accesses the user's goals from the goals database
         db = new ManageDatabase(this);
 

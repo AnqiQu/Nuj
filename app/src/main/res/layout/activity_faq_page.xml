@@ -7,19 +7,25 @@
     android:background="@android:color/black"
     tools:context=".FaqPage">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="346dp"
-        android:layout_height="113dp"
+    <TextView
+        android:id="@+id/lblFAQs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:gravity="center"
+        android:text="FAQs"
+        android:textColor="@color/colorAccent"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/quicksand"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/faqs" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtExplanation"
@@ -37,7 +43,7 @@
         app:fontFamily="@font/quicksand_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/lblFAQs" />
 
     <TextView
         android:id="@+id/Q1"

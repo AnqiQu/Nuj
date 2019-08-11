@@ -8,20 +8,25 @@
     android:scrollbarSize="12dp"
     tools:context=".NewGoal">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <TextView
+        android:id="@+id/lblNewGoal"
         android:layout_width="0dp"
-        android:layout_height="91dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:text="New Goal"
+        android:textColor="@color/colorAccent"
+        android:textSize="72sp"
+        android:textStyle="bold"
         android:gravity="center"
+        app:fontFamily="@font/quicksand"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/newgoallabel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnAdd"
@@ -44,13 +49,15 @@
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:text="What would you like to do?"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:fontFamily="@font/montserrat"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toStartOf="@+id/lblNewGoal"
+        app:layout_constraintTop_toBottomOf="@+id/lblNewGoal" />
 
     <TextView
         android:id="@+id/txtDifficulty"
@@ -76,9 +83,8 @@
         android:hint="I want to..."
         android:inputType="textLongMessage|textCapSentences"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/lblNewGoal"
+        app:layout_constraintStart_toStartOf="@+id/lblNewGoal"
         app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
     <SeekBar
@@ -98,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/holo_red_dark"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textStyle="italic"
         app:fontFamily="@font/montserrat"
         app:layout_constraintStart_toStartOf="@+id/goalDescription"

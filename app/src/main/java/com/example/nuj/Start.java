@@ -7,27 +7,28 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class Start extends AppCompatActivity {
 
     private ImageButton btnStart;
     private EditText nameInput;
+    private TextView txtNameError;
+    private TextView txtBirthdayError;
     SharedPreferences sp;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.US);
 
-    //Builds the GUI screen
+    //Builds the GUI screen on launch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class Start extends AppCompatActivity {
         sp = this.getSharedPreferences("login", MODE_PRIVATE);
 
         // Automatically logs the user in and takes them to the home screen when they launch the program again
-        if (sp.getBoolean("logged",false)) {
+        if (sp.getBoolean("logged", false)) {
             startActivity(new Intent(this, MainActivity.class));
         }
 
@@ -71,6 +72,7 @@ public class Start extends AppCompatActivity {
         // Creates the pop-up calendar where the user can pick their date of birth
         edittext.setOnClickListener(new View.OnClickListener() {
 
+            //Displays the pop-up calendar when the user click on the date of birth field
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(Start.this, date, myCalendar
@@ -88,21 +90,54 @@ public class Start extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
 
-                //stores all the user's info into a text file
-                createUser.saveInfo(
-                        getNameInput(),
-                        sdf.format(myCalendar.getTime()),
-                        sdf.format(getCurrentDate()),
-                        getApplicationContext());
+                //Validates the data before proceeding
+                boolean valid = false;
+                while (!valid) {
+                    //Presence check on name field
+                    if (notPresent(getNameInput())) {
+                        Toast.makeText(getBaseContext(), "Enter your name", Toast.LENGTH_SHORT).show();
+                        txtNameError.findViewById(R.id.txtNameError);
+                        txtNameError.setText("*Please enter your name"); //Displays error message
+                    }
+                    //Type check on name field
+                    else if (!isAlpha(getNameInput())) {
+                        Toast.makeText(getBaseContext(), "Name invalid", Toast.LENGTH_SHORT).show();
+                        txtNameError.findViewById(R.id.txtNameError);
+                        txtNameError.setText("*You name cannot include numbers or symbols"); //Displays error message
+                    }
+                    //Presence check on date field
+                    if (notPresent(sdf.format(myCalendar.getTime()))) {
+                        Toast.makeText(getBaseContext(), "Select your birthday", Toast.LENGTH_SHORT).show();
+                        txtBirthdayError.findViewById(R.id.txtBirthdayError);
+                        txtBirthdayError.setText("*Please select your birthday"); //Displays error message
+                    }
+                    //Type check on date field
+                    else if (isFuture(myCalendar.getTime())) {
+                        Toast.makeText(getBaseContext(), "Invalid birthday", Toast.LENGTH_SHORT).show();
+                        txtBirthdayError.findViewById(R.id.txtBirthdayError);
+                        txtBirthdayError.setText("*You birthday cannot be in the future. You are not Terminator"); //Displays error message
+                    }
 
-                // Edits the Shared preference to automatically log the user in when they launch the program again
-                sp.edit().putBoolean("logged",true).apply();
+                    if (!notPresent(getNameInput()) && isAlpha(getNameInput()) && !notPresent(sdf.format(myCalendar.getTime())) && !isFuture(myCalendar.getTime())) {
+                        valid = true;
+                    }
+                }
+                if (valid) {
+                    //stores all the user's info into a text file
+                    createUser.saveInfo(
+                            getNameInput(),
+                            sdf.format(myCalendar.getTime()),
+                            sdf.format(getCurrentDate()),
+                            getApplicationContext());
 
-                // Launches the home screen
-                Intent intent = new Intent(context, MainActivity.class);
-                startActivity(intent);
-                finish();
+                    // Edits the Shared preference to automatically log the user in when they launch the program again
+                    sp.edit().putBoolean("logged", true).apply();
 
+                    // Launches the home screen
+                    Intent intent = new Intent(context, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
 
         });
@@ -123,7 +158,7 @@ public class Start extends AppCompatActivity {
     }
 
     //Gets the current date from the device
-    public Date getCurrentDate(){
+    public Date getCurrentDate() {
 
         // Generates the current date
         Date currentDate = Calendar.getInstance().getTime();
@@ -132,19 +167,19 @@ public class Start extends AppCompatActivity {
         return currentDate;
     }
 
-//    // Presence check (used on multiple fields)
-//    public boolean notPresent(JTextField name) {
-//        return (name.getText().isEmpty());
-//    }
+    // Presence check (used on multiple fields)
+    public boolean notPresent(String text) {
+        return (text.length() == 0);
+    }
 
-//    // Type check (only alpha characters)
-//    public boolean isAlpha(String name) {
-//        return name.matches("[a-zA-Z]+");
-//    }
+    // Type check (only alpha characters)
+    public boolean isAlpha(String name) {
+        return name.matches("[a-zA-Z ]*");
+    }
 
-//    // Logic check on date
-//    public boolean notFuture(LocalDate date) {
-//        return (date.compareTo(LocalDate.now()) < 0);
-//    }
+    // Logic check on date
+    public boolean isFuture(Date date) {
+        return (date.compareTo(getCurrentDate()) > 0);
+    }
 
 }

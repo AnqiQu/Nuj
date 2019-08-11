@@ -46,22 +46,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <ImageView
-        android:id="@+id/lblGoals"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/allGoalsScrollView"
-        app:layout_constraintEnd_toStartOf="@+id/NujLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/goalslabel" />
-
     <ImageButton
         android:id="@+id/btnBackFromGoals"
         android:layout_width="50dp"
@@ -92,4 +76,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allGoalsScrollView"
         app:srcCompat="@drawable/newgoalbutton" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Goals"
+        android:textColor="@color/colorAccent"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:fontFamily="@font/quicksand"
+        app:layout_constraintBottom_toTopOf="@+id/allGoalsScrollView"
+        app:layout_constraintEnd_toStartOf="@+id/NujLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

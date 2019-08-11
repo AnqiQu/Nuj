@@ -20,7 +20,7 @@ public class GetHelp extends AppCompatActivity {
 
         // Button click takes user back to home screen
         btnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toHome();
             }
         });
@@ -28,7 +28,7 @@ public class GetHelp extends AppCompatActivity {
     }
 
     // Method linked to back button that takes user to home screen
-    public void toHome(){
+    public void toHome() {
         this.finish();
     }
 }

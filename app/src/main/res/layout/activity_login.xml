@@ -82,4 +82,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/startbutton" />
 
+    <TextView
+        android:id="@+id/txtNameError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintStart_toStartOf="@+id/nameInput"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
+
+    <TextView
+        android:id="@+id/txtBirthdayError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="italic"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintStart_toStartOf="@+id/Birthday"
+        app:layout_constraintTop_toBottomOf="@+id/Birthday" />
+
 </android.support.constraint.ConstraintLayout>

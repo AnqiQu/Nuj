@@ -55,7 +55,7 @@ public class ManageTextFile {
         try {
             Scanner readFromFile = new Scanner(new File(ctx.getFilesDir(), NUJ_USER_TXT)).useDelimiter("#");
 
-            while (readFromFile.hasNext()){
+            while (readFromFile.hasNext()) {
                 userName = readFromFile.next();
                 birthday = getDate(readFromFile.next());
                 joinedDate = getDate(readFromFile.next());
@@ -74,7 +74,9 @@ public class ManageTextFile {
         Date date = new Date();
         try {
             date = dateFormat.parse(day);
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+
+        }
         return date;
     }
 

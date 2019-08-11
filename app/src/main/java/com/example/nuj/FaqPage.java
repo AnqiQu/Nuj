@@ -1,8 +1,8 @@
 package com.example.nuj;
 
 import android.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -77,7 +77,7 @@ public class FaqPage extends AppCompatActivity {
         });
 
         //Links the back button to the goBack() method
-        btnBack.setOnClickListener(new View.OnClickListener(){
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goBack();
@@ -86,12 +86,12 @@ public class FaqPage extends AppCompatActivity {
     }
 
     //Reads the questions and answers from the text file and saves the data into 2D array
-    public void readQA(){
+    public void readQA() {
 
         try {
             Scanner readFromFile = new Scanner(new File(FAQs_TXT)).useDelimiter("#");
-            for(int i = 0; i < 4; i++){
-                for (int j = 0; j < 1; j++){
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 1; j++) {
                     QA[i][j] = readFromFile.next();
                 }
             }
@@ -103,12 +103,12 @@ public class FaqPage extends AppCompatActivity {
     }
 
     //Takes the user back to the previous screen
-    public void goBack(){
+    public void goBack() {
         this.finish();
     }
 
     //Shows the answers in a pop-up dialog format
-    public void showAnswer(int q){
+    public void showAnswer(int q) {
         AlertDialog.Builder answer = new AlertDialog.Builder(this);
         answer.setCancelable(true);
         answer.setTitle(QA[q][0]);

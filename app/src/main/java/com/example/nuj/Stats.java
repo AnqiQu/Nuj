@@ -1,7 +1,7 @@
 package com.example.nuj;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -35,12 +35,12 @@ public class Stats extends AppCompatActivity {
             public void onClick(View view) {
                 goBack();
             }
-            });
+        });
 
     }
 
     //Takes the user back to the home screen
-    public void goBack(){
+    public void goBack() {
         this.finish();
     }
 }

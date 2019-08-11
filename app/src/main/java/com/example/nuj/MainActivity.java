@@ -1,10 +1,13 @@
 package com.example.nuj;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -51,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Clicking on text takes user to screen displaying all their goals
         txtYourGoals.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toGoals();
             }
         });
 
         // Clicking on text takes user to screen displaying their stats
         txtMessage.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toStats();
             }
         });
@@ -77,28 +80,28 @@ public class MainActivity extends AppCompatActivity {
 
         // Button click allows user to add a new goal
         btnNewGoal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toNewGoal();
             }
         });
 
         // Button click takes user to Help Others screen
         btnHelpOthers.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toHelpOthers();
             }
         });
 
         // Button click takes user to Get Help screen
         btnGetHelp.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toGetHelp();
             }
         });
 
         // Button click takes user to About screen
         btnAbout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 toAbout();
             }
         });
@@ -115,13 +118,13 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) this);
 //    }
 
-    public void reload (){
+    public void reload() {
         finish();
         startActivity(getIntent());
     }
 
     // Instantiates a user object using the user's info stored in the text file
-    public void instantiateUser(){
+    public void instantiateUser() {
 
         user = new User(
                 textFile.getUserName(),
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Creates and populates the scrollable list of goals
-    public void populateGoals(){
+    public void populateGoals() {
         //Creates an ArrayList of all the ongoing goals using data from the database
         ArrayList<String> goalList = new ArrayList<>();
         for (int i = 1; i <= db.getOngoingGoals().size(); i++) {
@@ -158,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
             mAdapter.addAll(goalList);
             mAdapter.notifyDataSetChanged();
         }
-
 
 
 //        /*
@@ -195,52 +197,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Displays an appropriate message for the user based on their productivity
-    public String displayMessage(){
+    public String displayMessage() {
         double average = user.getAverage();
         double deviation = user.getDeviation();
         double recentAverage = user.getRecentAverage();
 
-        if (recentAverage < average - deviation){
+        if (recentAverage < average - deviation) {
             return "Your goals are sad that they are not being completed... Is everything okay?";
-        }else if (recentAverage > average + deviation){
+        } else if (recentAverage > average + deviation) {
             return "Wow, you are doing amazing! Keep smashing your goals!";
-        }else{
+        } else {
             return "You are on track with your goals! Keep up the good work!";
         }
     }
 
     // Links button to Goals screen
-    public void toGoals(){
+    public void toGoals() {
         Intent intent = new Intent(this, Goals.class);
         startActivity(intent);
     }
 
     // Links button to Stats screen
-    public void toStats(){
+    public void toStats() {
         Intent intent = new Intent(this, Stats.class);
         startActivity(intent);
     }
 
     // Links button to New Goal screen
-    public void toNewGoal(){
+    public void toNewGoal() {
         Intent intent = new Intent(this, NewGoal.class);
         startActivity(intent);
     }
 
     // Links button to Get Help screen
-    public void toGetHelp(){
+    public void toGetHelp() {
         Intent intent = new Intent(this, GetHelp.class);
         startActivity(intent);
     }
 
     // Links button to About screen
-    public void toAbout(){
+    public void toAbout() {
         Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }
 
     // Links button to Help Others screen
-    public void toHelpOthers(){
+    public void toHelpOthers() {
         Intent intent = new Intent(this, HelpOthers.class);
         startActivity(intent);
     }
