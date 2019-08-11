@@ -23,7 +23,7 @@ public class User {
     public User(String name, Date birthday, Date joinedDate, List<Goal> allGoals, List<Goal> completedGoals, List<Goal> ongoingGoals){
         this.name = name;
         this.birthday = birthday;
-        this.joinedDate = new Date();
+        this.joinedDate = joinedDate;
         this.allGoals = allGoals;
         this.completedGoals = completedGoals;
         this.ongoingGoals = ongoingGoals;
@@ -39,7 +39,7 @@ public class User {
     }
 
     // Method to calculate user's average
-    public double calculateAverage(List<Goal> goalList){
+    private double calculateAverage(List<Goal> goalList){
         List<Integer> daysTaken = new ArrayList<>();
 
         for(Goal i : goalList){
@@ -56,7 +56,7 @@ public class User {
     }
 
     // Method to calculate user's deviation from their average
-    public void calculateDeviation(List<Goal> goalList){
+    private void calculateDeviation(List<Goal> goalList){
         double sum = 0.0, standardDeviation = 0.0;
 
         List<Integer> daysTaken = new ArrayList<>();
