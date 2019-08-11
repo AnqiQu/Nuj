@@ -13,7 +13,7 @@ public class About extends AppCompatActivity {
     private ImageButton btnAboutAnqi;
     private ImageButton btnBack;
 
-    //Builds the GUI screen
+    //Builds the GUI screen on launch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

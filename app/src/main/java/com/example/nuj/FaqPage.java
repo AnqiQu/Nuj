@@ -19,8 +19,8 @@ public class FaqPage extends AppCompatActivity {
     //2D array stores the question-answer pairs that is read from a text file
     private String[][] QA = new String[5][2];
 
-    //This is the text file that the user's info will be stored in
-    private static final String FAQs_TXT = "NujUser.txt";
+    //This is the text file that the questions and answers will be stored in
+    private static final String FAQs_TXT = "FAQs.txt";
 
     //Launches the GUI screen on on create
     @Override
