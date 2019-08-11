@@ -17,6 +17,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
         android:fillViewport="true"
+        android:isScrollContainer="true"
         app:layout_constraintBottom_toTopOf="@+id/btnNewGoal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -33,7 +34,8 @@
             <ListView
                 android:id="@+id/goalsListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="true"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

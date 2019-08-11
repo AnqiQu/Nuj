@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ManageDatabase db;
     private ManageTextFile textFile;
-    private User user;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         txtYourGoals.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 toGoals();
+            }
+        });
+
+        // Clicking on text takes user to screen displaying their stats
+        txtMessage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                toStats();
             }
         });
 
@@ -205,6 +212,12 @@ public class MainActivity extends AppCompatActivity {
     // Links button to Goals screen
     public void toGoals(){
         Intent intent = new Intent(this, Goals.class);
+        startActivity(intent);
+    }
+
+    // Links button to Stats screen
+    public void toStats(){
+        Intent intent = new Intent(this, Stats.class);
         startActivity(intent);
     }
 

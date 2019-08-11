@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnNewGoal2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NujLogo ">
+        app:layout_constraintTop_toBottomOf="@+id/NujLogo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,12 +30,13 @@
             <ListView
                 android:id="@+id/allGoalsListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="true"/>
         </LinearLayout>
     </ScrollView>
 
     <ImageView
-        android:id="@+id/NujLogo "
+        android:id="@+id/NujLogo"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
@@ -56,26 +57,10 @@
         android:layout_marginRight="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/allGoalsScrollView"
-        app:layout_constraintEnd_toStartOf="@+id/NujLogo "
+        app:layout_constraintEnd_toStartOf="@+id/NujLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/goalslabel" />
-
-    <ImageButton
-        android:id="@+id/btnNewGoal"
-        android:layout_width="363dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/newgoalbutton" />
 
     <ImageButton
         android:id="@+id/btnBackFromGoals"
@@ -87,6 +72,24 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/NujLogo "
+        app:layout_constraintTop_toTopOf="@+id/NujLogo"
         app:srcCompat="@drawable/backbutton" />
+
+    <ImageButton
+        android:id="@+id/btnNewGoal2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allGoalsScrollView"
+        app:srcCompat="@drawable/newgoalbutton" />
 </android.support.constraint.ConstraintLayout>

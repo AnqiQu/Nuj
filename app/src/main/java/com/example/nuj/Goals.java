@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Goals extends AppCompatActivity {
 
     private ImageButton btnNewGoal2;
+    private ImageButton btnBackFromGoals;
     private ArrayAdapter<String> mAdapter;
     private ListView allGoalsListView;
 
@@ -23,6 +24,39 @@ public class Goals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
 
+        //Calls method to display goals on the screen
+        displayGoals();
+
+        // Links buttons to their corresponding views in the GUI
+        btnNewGoal2 = findViewById(R.id.btnNewGoal2);
+        btnBackFromGoals = findViewById(R.id.btnBackFromGoals);
+
+        // Button click allows user to add a new goal
+        btnNewGoal2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                toNewGoal();
+            }
+        });
+        btnBackFromGoals.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                goBack();
+            }
+        });
+    }
+
+    // Links button to New Goal screen
+    public void toNewGoal(){
+        Intent intent = new Intent(this, NewGoal.class);
+        startActivity(intent);
+    }
+
+    //Takes the user back to the home screen
+    public void goBack(){
+        this.finish();
+    }
+
+    //Method displays all the user's goals
+    public void displayGoals(){
         // Accesses the user's goals from the goals database
         db = new ManageDatabase(this);
 
@@ -52,23 +86,6 @@ public class Goals extends AppCompatActivity {
             mAdapter.addAll(allGoalsList);
             mAdapter.notifyDataSetChanged();
         }
-
-
-        // Links buttons to their corresponding views in the GUI
-        btnNewGoal2 = findViewById(R.id.btnFaq);
-
-        // Button click allows user to add a new goal
-        btnNewGoal2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                toNewGoal();
-            }
-        });
-    }
-
-    // Links button to New Goal screen
-    public void toNewGoal(){
-        Intent intent = new Intent(this, NewGoal.class);
-        startActivity(intent);
     }
 
 }
