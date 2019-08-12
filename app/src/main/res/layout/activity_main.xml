@@ -118,7 +118,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:fontFamily="@font/quicksand"
         app:layout_constraintEnd_toStartOf="@+id/logo_home"
         app:layout_constraintStart_toStartOf="parent"

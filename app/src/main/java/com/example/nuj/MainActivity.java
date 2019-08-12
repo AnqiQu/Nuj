@@ -1,13 +1,17 @@
 package com.example.nuj;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,18 +59,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Personalises the welcome message to the user
+        txtWelcome.setText("Welcome " + user.getName() + " :)");
+
+        //Displays a personal message based on the user's productivity
+        txtMessage.setText(displayMessage());
+
         // Clicking on text takes user to screen displaying their stats
         txtMessage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 toStats();
             }
         });
-
-        //Personalises the welcome message to the user
-        txtWelcome.setText("Welcome " + user.getName() + " :)");
-
-        //Displays a personal message based on the user's productivity
-        txtMessage.setText(displayMessage());
 
         // Links buttons to their corresponding views in the GUI
         btnNewGoal = findViewById(R.id.btnNewGoal);
@@ -185,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
         //Repopulates the list of goals
 
         //Creates an ArrayList of all the ongoing goals using data from the database
-        ArrayList<String> goalList = new ArrayList<>();
+        final ArrayList<String> goalList = new ArrayList<>();
 
         // List of the ongoing goals
-        List<Goal> ongoing = db.getOngoingGoals();
+        final List<Goal> ongoing = db.getOngoingGoals();
         for (int i = 0; i < db.getOngoingGoals().size(); i++) {
             goalList.add(ongoing.get(i).getDescription());
         }
@@ -207,6 +211,41 @@ public class MainActivity extends AppCompatActivity {
             mAdapter.clear();
             mAdapter.addAll(goalList);
             mAdapter.notifyDataSetChanged();
+        }
+
+        //Deletes a goal from the list when the user long clicks on it
+        goalsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //Removes the goal from the list that is displayed
+                goalList.remove(position);
+
+                //Updates it to be complete in the database
+                db.updateCompleted(ongoing.get(position));
+
+                mAdapter.notifyDataSetChanged();
+                Toast.makeText(MainActivity.this, "Goal completed", Toast.LENGTH_LONG).show();
+
+                //Restarts the screen to update list
+                restartActivity(MainActivity.this);
+
+                return true;
+            }
+
+        });
+
+    }
+
+    //Reloads the screen
+    //Called when a goal is deleted and the list must be updates
+    public static void restartActivity(Activity activity){
+        if (Build.VERSION.SDK_INT >= 11) {
+            activity.recreate();
+        } else {
+            activity.finish();
+            activity.startActivity(activity.getIntent());
         }
     }
 
