@@ -48,17 +48,13 @@ public class NewGoal extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 //Validates the description field by making sure that the user has entered a description
-                boolean valid = false;
-                while (!valid) {
-                    if (notPresent(getGoalDescription())) {
-                        Toast.makeText(getBaseContext(), "Description please!", Toast.LENGTH_SHORT).show();
-                        txtDescriptionError.findViewById(R.id.txtDescriptionError);
-                        txtDescriptionError.setText("*Please enter a goal description"); //Displays error message
-                    } else {
-                        valid = true;
-                    }
-                }
-                if (valid) {
+                if (notPresent(getGoalDescription())) {
+                    Toast.makeText(getBaseContext(), "Description please!", Toast.LENGTH_SHORT).show();
+                    txtDescriptionError = findViewById(R.id.txtDescriptionError);
+
+                    System.out.println("Here");
+                    txtDescriptionError.setText("*Please enter a goal description"); //Displays error message
+                } else {
                     //stores a new goal's info into the database
                     addGoal.addGoal(
                             getGoalDescription(),

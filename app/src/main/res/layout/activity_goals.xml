@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@android:color/black"
+    android:background="@android:color/black"
     tools:context=".Goals">
 
     <ScrollView
         android:id="@+id/allGoalsScrollView"
-        android:layout_width="365dp"
-        android:layout_height="459dp"
+        android:layout_width="0dp"
+        android:layout_height="450dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnNewGoal2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +25,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="450dp"
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/allGoalsListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="true"/>
+                android:layout_height="450dp"
+                android:nestedScrollingEnabled="true" />
         </LinearLayout>
     </ScrollView>
 
@@ -86,11 +87,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:gravity="center"
         android:text="Goals"
         android:textColor="@color/colorAccent"
         android:textSize="72sp"
         android:textStyle="bold"
-        android:gravity="center"
         app:fontFamily="@font/quicksand"
         app:layout_constraintBottom_toTopOf="@+id/allGoalsScrollView"
         app:layout_constraintEnd_toStartOf="@+id/NujLogo"

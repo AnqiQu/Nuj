@@ -185,7 +185,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
     public List<Goal> getOngoingGoals() {
 
         List<Goal> goals = new LinkedList<>();
-        String query = "SELECT  * FROM " + TABLE_NAME + " WHERE " + KEY_COMPLETED + " = 0";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMPLETED + " = 0";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -205,7 +205,8 @@ public class ManageDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_DIFFICULTY, difficulty);
-        values.put(KEY_STARTDATE, "#" + startDate + "#");
+        values.put(KEY_STARTDATE, startDate);
+        values.put(KEY_ENDDATE, "9999/12/31"); // Just set the end date to indefinite so that parsing an encomplete date doesn't result in an error
         values.put(KEY_COMPLETED, false);
         // insert values into the table
         db.insert(TABLE_NAME, null, values);

@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //reload();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -43,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Calls method to instantiate new user
         instantiateUser();
-
-        //Calls the method to populate the goals
-        populateGoals();
 
         //Links the TextViews to their corresponding views in the GUI
         txtWelcome = findViewById(R.id.txtWelcome);
@@ -108,21 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // This method is called after this activity has been paused or restarted.
-    // Often, this is after new data has been inserted through an AddTaskActivity,
-    // so this restarts the loader to re-query the underlying data for any changes.
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        // re-queries for all tasks
-//        getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) this);
-//    }
-
-    public void reload() {
-        finish();
-        startActivity(getIntent());
-    }
-
     // Instantiates a user object using the user's info stored in the text file
     public void instantiateUser() {
 
@@ -135,74 +116,15 @@ public class MainActivity extends AppCompatActivity {
                 db.getOngoingGoals());
     }
 
-    //Creates and populates the scrollable list of goals
-    public void populateGoals() {
-        //Creates an ArrayList of all the ongoing goals using data from the database
-        ArrayList<String> goalList = new ArrayList<>();
-        for (int i = 1; i <= db.getOngoingGoals().size(); i++) {
-            goalList.add(db.getOngoingGoals().get(i).getDescription());
-        }
-
-        // Set the ListView to its corresponding view
-        goalsListView = findViewById(R.id.goalsListView);
-
-//        // Set the layout for the RecyclerView to be a linear layout, which measures and positions items within a RecyclerView into a linear list
-//        goalsListView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the adapter and attach it to the RecyclerView
-        if (mAdapter == null) {
-            mAdapter = new ArrayAdapter<>(this,
-                    R.layout.list_item, // what view to use for the items
-                    goalList); // where to get all the data
-
-            goalsListView.setAdapter(mAdapter); // set it as the adapter of the ListView instance
-        } else {
-            mAdapter.clear();
-            mAdapter.addAll(goalList);
-            mAdapter.notifyDataSetChanged();
-        }
-
-
-//        /*
-//         Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
-//         An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
-//         and uses callbacks to signal when a user is performing these actions.
-//         */
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(ListView listView, ListView.View viewHolder, RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            // Called when a user swipes left or right on a ViewHolder
-//            @Override
-//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-//
-//                // COMPLETED (1) Construct the URI for the item to delete
-//                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
-//                // Retrieve the id of the task to delete
-//                Integer id = (Integer) viewHolder.itemView.getTag();
-//
-//                mAdapter.remove(id.intValue());
-//                mAdapter.notifyDataSetChanged();
-//
-//
-//                // COMPLETED (3) Restart the loader to re-query for all tasks after a deletion
-//                getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainActivity.this);
-//
-//                Toast.makeText(getBaseContext(), "yeah! you completed it!", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }).attachToListView(goalsListView);
-    }
-
     //Displays an appropriate message for the user based on their productivity
     public String displayMessage() {
         double average = user.getAverage();
         double deviation = user.getDeviation();
         double recentAverage = user.getRecentAverage();
 
-        if (recentAverage < average - deviation) {
+        if (db.getCompletedGoals().size() == 0){
+            return "Complete some goals to get started :)";
+        }else if (recentAverage < average - deviation) {
             return "Your goals are sad that they are not being completed... Is everything okay?";
         } else if (recentAverage > average + deviation) {
             return "Wow, you are doing amazing! Keep smashing your goals!";
@@ -253,18 +175,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Reloads the goal list
+    // This method is called after this activity has been paused or restarted.
+    // Usually, this is after a new task has been added
+    // so this restarts the loader to re-query the underlying data for any changes.
     @Override
     public void onResume() {
         super.onResume();
 
+        //Repopulates the list of goals
+
+        //Creates an ArrayList of all the ongoing goals using data from the database
         ArrayList<String> goalList = new ArrayList<>();
-        for (int i = 1; i <= db.getOngoingGoals().size(); i++) {
-            goalList.add(db.getGoalDescription(i));
+
+        // List of the ongoing goals
+        List<Goal> ongoing = db.getOngoingGoals();
+        for (int i = 0; i < db.getOngoingGoals().size(); i++) {
+            goalList.add(ongoing.get(i).getDescription());
         }
 
-        mAdapter.clear();
-        mAdapter.addAll(goalList);
-        mAdapter.notifyDataSetChanged();
+        // Set the ListView to its corresponding view
+        goalsListView = findViewById(R.id.goalsListView);
+
+        // Initialize the adapter and attach it to the RecyclerView
+        if (mAdapter == null) {
+            mAdapter = new ArrayAdapter<>(this,
+                    R.layout.list_item, // what view to use for the items
+                    goalList); // where to get all the data
+
+            goalsListView.setAdapter(mAdapter); // set it as the adapter of the ListView instance
+        } else {
+            mAdapter.clear();
+            mAdapter.addAll(goalList);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
 }

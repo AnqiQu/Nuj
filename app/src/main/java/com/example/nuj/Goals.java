@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Goals extends AppCompatActivity {
 
@@ -63,10 +64,10 @@ public class Goals extends AppCompatActivity {
         //Creates an ArrayList of all the ongoing goals using data from the database
         //Ongoing goals are first added to the list followed by completed goals
         ArrayList<String> allGoalsList = new ArrayList<>();
-        for (int i = 1; i <= db.getOngoingGoals().size(); i++) {
+        for (int i = 0; i < db.getOngoingGoals().size(); i++) { // Reminder that arrays start at 0
             allGoalsList.add(db.getOngoingGoals().get(i).getDescription());
         }
-        for (int i = 1; i <= db.getCompletedGoals().size(); i++) {
+        for (int i = 0; i < db.getCompletedGoals().size(); i++) {
             allGoalsList.add(db.getCompletedGoals().get(i).getDescription());
         }
         db.close();
@@ -84,6 +85,42 @@ public class Goals extends AppCompatActivity {
         } else {
             mAdapter.clear();
             mAdapter.addAll(allGoalsList);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    // Reloads the goal list
+    // This method is called after this activity has been paused or restarted.
+    // Usually, this is after a new task has been added
+    // so this restarts the loader to re-query the underlying data for any changes.
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Repopulates the list of goals
+
+        //Creates an ArrayList of all the ongoing goals using data from the database
+        ArrayList<String> goalList = new ArrayList<>();
+
+        // List of the ongoing goals
+        List<Goal> ongoing = db.getOngoingGoals();
+        for (int i = 0; i < db.getOngoingGoals().size(); i++) {
+            goalList.add(ongoing.get(i).getDescription());
+        }
+
+        // Set the ListView to its corresponding view
+        allGoalsListView = findViewById(R.id.allGoalsListView);
+
+        // Initialize the adapter and attach it to the RecyclerView
+        if (mAdapter == null) {
+            mAdapter = new ArrayAdapter<>(this,
+                    R.layout.list_item, // what view to use for the items
+                    goalList); // where to get all the data
+
+            allGoalsListView.setAdapter(mAdapter); // set it as the adapter of the ListView instance
+        } else {
+            mAdapter.clear();
+            mAdapter.addAll(goalList);
             mAdapter.notifyDataSetChanged();
         }
     }

@@ -91,38 +91,35 @@ public class Start extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 //Validates the data before proceeding
-                boolean valid = false;
-                while (!valid) {
-                    //Presence check on name field
-                    if (notPresent(getNameInput())) {
-                        Toast.makeText(getBaseContext(), "Enter your name", Toast.LENGTH_SHORT).show();
-                        txtNameError.findViewById(R.id.txtNameError);
-                        txtNameError.setText("*Please enter your name"); //Displays error message
-                    }
-                    //Type check on name field
-                    else if (!isAlpha(getNameInput())) {
-                        Toast.makeText(getBaseContext(), "Name invalid", Toast.LENGTH_SHORT).show();
-                        txtNameError.findViewById(R.id.txtNameError);
-                        txtNameError.setText("*You name cannot include numbers or symbols"); //Displays error message
-                    }
-                    //Presence check on date field
-                    if (notPresent(sdf.format(myCalendar.getTime()))) {
-                        Toast.makeText(getBaseContext(), "Select your birthday", Toast.LENGTH_SHORT).show();
-                        txtBirthdayError.findViewById(R.id.txtBirthdayError);
-                        txtBirthdayError.setText("*Please select your birthday"); //Displays error message
-                    }
-                    //Type check on date field
-                    else if (isFuture(myCalendar.getTime())) {
-                        Toast.makeText(getBaseContext(), "Invalid birthday", Toast.LENGTH_SHORT).show();
-                        txtBirthdayError.findViewById(R.id.txtBirthdayError);
-                        txtBirthdayError.setText("*You birthday cannot be in the future. You are not Terminator"); //Displays error message
-                    }
 
-                    if (!notPresent(getNameInput()) && isAlpha(getNameInput()) && !notPresent(sdf.format(myCalendar.getTime())) && !isFuture(myCalendar.getTime())) {
-                        valid = true;
-                    }
+                //Presence check on name field
+                if (notPresent(getNameInput())) {
+                    Toast.makeText(getBaseContext(), "Enter your name", Toast.LENGTH_SHORT).show();
+                    txtNameError = findViewById(R.id.txtNameError);
+                    txtNameError.setText("*Please enter your name"); //Displays error message
                 }
-                if (valid) {
+                //Type check on name field
+                else if (!isAlpha(getNameInput())) {
+                    Toast.makeText(getBaseContext(), "Name invalid", Toast.LENGTH_SHORT).show();
+                    txtNameError = findViewById(R.id.txtNameError);
+                    txtNameError.setText("*You name cannot include numbers or symbols"); //Displays error message
+                }
+                //Presence check on date field
+                if (myCalendar.getTime().equals(null)) {
+                    Toast.makeText(getBaseContext(), "Select your birthday", Toast.LENGTH_SHORT).show();
+                    txtBirthdayError = findViewById(R.id.txtBirthdayError);
+                    txtBirthdayError.setText("*Please select your birthday"); //Displays error message
+                }
+                //Type check on date field
+                else if (isFuture(myCalendar.getTime())) {
+                    Toast.makeText(getBaseContext(), "Invalid birthday", Toast.LENGTH_SHORT).show();
+                    txtBirthdayError = findViewById(R.id.txtBirthdayError);
+                    txtBirthdayError.setText("*You birthday cannot be in the future. You are not Terminator"); //Displays error message
+                }
+
+                System.out.println(myCalendar.getTime());
+
+                if (!notPresent(getNameInput()) && isAlpha(getNameInput()) && !myCalendar.getTime().equals(null) && !isFuture(myCalendar.getTime())) {
                     //stores all the user's info into a text file
                     createUser.saveInfo(
                             getNameInput(),
@@ -172,7 +169,7 @@ public class Start extends AppCompatActivity {
         return (text.length() == 0);
     }
 
-    // Type check (only alpha characters)
+    // Type check on name(only alpha characters)
     public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z ]*");
     }
