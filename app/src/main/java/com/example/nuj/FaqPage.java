@@ -7,20 +7,29 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 public class FaqPage extends AppCompatActivity {
 
     private TextView[] questions;
     private ImageButton btnBack;
 
-    //2D array stores the question-answer pairs that is read from a text file
-    private String[][] QA = new String[5][2];
-
-    //This is the text file that the questions and answers will be stored in
-    private static final String FAQs_TXT = "FAQs.txt";
+    //2D array stores the question-answer pairs
+    private String[][] QA = new String[][] {
+        {"How do I add a new goal?",
+            "You can add a new goal using the \"New goal\" button on the home screen"
+        },
+        {"How do I mark a goal off as completed?",
+            "Simply tap and hold on the goal on the list on the home screen"
+        },
+        {"I accidentally said I completed a goal but I actually haven't. How do I undo it?",
+            "Unfortunately at this point you can't undo any completed goals"
+        },
+        {"Do you have an iOS version of Nuj?",
+            "Unfortunately not :( However, its development is in progress so watch this space"
+        },
+        {"Does Nuj steal your personal data?",
+                "Not at all! All you data is safe with us :) (we are not Facebook)"
+        }
+    };
 
     //Launches the GUI screen on on create
     @Override
@@ -28,15 +37,12 @@ public class FaqPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq_page);
 
-        //Reads the questions and answers for the FAQ
-        readQA();
-
         // Links textviews and buttons to their corresponding views in the GUI
-        questions = new TextView[]{findViewById(R.id.Q1), findViewById(R.id.Q2), findViewById(R.id.Q3), findViewById(R.id.Q3), findViewById(R.id.Q4), findViewById(R.id.Q5)};
+        questions = new TextView[]{findViewById(R.id.Q1), findViewById(R.id.Q2), findViewById(R.id.Q3), findViewById(R.id.Q4), findViewById(R.id.Q5)};
         btnBack = findViewById(R.id.btnBackFromFAQs);
 
         //Sets the questions using the array of questions
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             questions[i].setText(QA[i][0]);
         }
 
@@ -62,10 +68,10 @@ public class FaqPage extends AppCompatActivity {
             }
         });
 
-        questions[4].setOnClickListener(new View.OnClickListener() {
+        questions[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAnswer(4);
+                showAnswer(3);
             }
         });
 
@@ -85,29 +91,14 @@ public class FaqPage extends AppCompatActivity {
         });
     }
 
-    //Reads the questions and answers from the text file and saves the data into 2D array
-    public void readQA() {
-
-        try {
-            Scanner readFromFile = new Scanner(new File(FAQs_TXT)).useDelimiter("#");
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 1; j++) {
-                    QA[i][j] = readFromFile.next();
-                }
-            }
-            readFromFile.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     //Takes the user back to the previous screen
     public void goBack() {
         this.finish();
     }
 
     //Shows the answers in a pop-up dialog format
+    //Takes in the number of the question as a parameter
+    //And displays the corresponding answer
     public void showAnswer(int q) {
         AlertDialog.Builder answer = new AlertDialog.Builder(this);
         answer.setCancelable(true);

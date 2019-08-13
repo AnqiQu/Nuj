@@ -42,6 +42,8 @@ public class User {
     }
 
     // Method to calculate user's average number of days taken per goal
+    //Takes in a list of the user's completed goals as a parameter
+    //And directly sets the value of the user's average
     private double calculateAverage(List<Goal> goalList) {
         List<Integer> daysTaken = new ArrayList<>();
 
@@ -59,6 +61,8 @@ public class User {
     }
 
     // Method to calculate user's deviation from their average
+    //Takes in a list of the user's completed goals as a parameter
+    //And directly sets the value of the user's standard deviation
     private void calculateDeviation(List<Goal> goalList) {
         double sum = 0.0, standardDeviation = 0.0;
 
@@ -83,7 +87,7 @@ public class User {
         deviation = Math.sqrt(standardDeviation / length);
     }
 
-    //Calculates the number of days between 2 dates
+    //Calculates the number of days between 2 dates, taken in as parameters
     private static int daysBetween(Date start, Date end) {
         int difference = (int) (start.getTime() - end.getTime()) / 86400000;
         return Math.abs(difference);

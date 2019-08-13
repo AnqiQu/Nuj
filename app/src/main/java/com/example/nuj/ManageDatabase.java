@@ -94,7 +94,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
         return goal;
     }
 
-    //Queries the database for a goal with special primary key using SQL
+    //Queries the database for a goal using SQL, with special primary key that is taken in as a parameter
     public Goal getGoal(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         //Query the database
@@ -200,6 +200,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
     }
 
     //Adds a goal to the database
+    //Takes in the data about the goal as parameters
     public void addGoal(String description, int difficulty, String startDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -214,6 +215,7 @@ public class ManageDatabase extends SQLiteOpenHelper {
     }
 
     //Updates a goal to make it completed
+    //Takes in the goal that needs to be updated as a parameter
     public void updateCompleted(Goal goal) {
         // Get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();

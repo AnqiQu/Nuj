@@ -170,11 +170,13 @@ public class Start extends AppCompatActivity {
     }
 
     // Type check on name(only alpha characters)
+    //Used on the name field
     public boolean isAlpha(String name) {
         return name.matches("[a-zA-Z ]*");
     }
 
-    // Logic check on date
+    // Logic check on date which is taken in as a parameter
+    // Used on the date field
     public boolean isFuture(Date date) {
         return (date.compareTo(getCurrentDate()) > 0);
     }

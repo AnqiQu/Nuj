@@ -35,7 +35,7 @@ public class ManageTextFile {
         return joinedDate;
     }
 
-    //Saves user info to the text file
+    //Saves user info to the text file, using the user's data which is taken in as parameters
     public void saveInfo(String name, String birthday, String joinedDate, Context ctx) {
 
         try {

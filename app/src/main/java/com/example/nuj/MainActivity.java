@@ -228,8 +228,11 @@ public class MainActivity extends AppCompatActivity {
                 mAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Goal completed", Toast.LENGTH_LONG).show();
 
-                //Restarts the screen to update list
-                restartActivity(MainActivity.this);
+                //Restarts the adapter to update list
+                //Called when a goal is deleted and the list must be updates
+                mAdapter.clear();
+                mAdapter.addAll(goalList);
+                mAdapter.notifyDataSetChanged();
 
                 return true;
             }
@@ -237,16 +240,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    //Reloads the screen
-    //Called when a goal is deleted and the list must be updates
-    public static void restartActivity(Activity activity){
-        if (Build.VERSION.SDK_INT >= 11) {
-            activity.recreate();
-        } else {
-            activity.finish();
-            activity.startActivity(activity.getIntent());
-        }
-    }
-
 }

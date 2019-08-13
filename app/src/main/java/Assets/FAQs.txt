@@ -1,5 +1,0 @@
-#How do I add a new goal?#You can add a new goal using the "New goal" button on the home screen#
-#How do I mark a goal off as completed?#Simply tap on the goal on the list on the home screen#
-#I accidentally said I completed a goal but I actually haven't. How do I undo it?#Unfortunately at this point you can't undo any completed goals#
-#Do you have an iOS version of Nuj?#Unfortunately not :( However, its development is in progress so watch this space#
-#Does Nuj steal your personal data?#Not at all! All you data is safe with us"#

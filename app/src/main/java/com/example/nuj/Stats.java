@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class Stats extends AppCompatActivity {
 
     private TextView lblAverage;
@@ -24,10 +26,19 @@ public class Stats extends AppCompatActivity {
         lblDeviation = findViewById(R.id.lblDeviation);
         lblRecent = findViewById(R.id.lblRecent);
 
+        //Formats the stats to round each value off to 2 decimal places
+        DecimalFormat df = new DecimalFormat("####0.00");
+
         //Sets the values of the average, deviation and recent average according to the user's personal data
-        lblAverage.setText((int) MainActivity.user.getAverage());
-        lblDeviation.setText((int) MainActivity.user.getDeviation());
-        lblRecent.setText((int) MainActivity.user.getRecentAverage());
+       if(String.valueOf(MainActivity.user.getAverage()) != "NaN"){
+           lblAverage.setText(String.valueOf(df.format(MainActivity.user.getAverage())));
+       }
+       if(String.valueOf(MainActivity.user.getDeviation()) != "NaN"){
+           lblDeviation.setText(String.valueOf(df.format(MainActivity.user.getDeviation())));
+       }
+       if(String.valueOf(MainActivity.user.getRecentAverage()) != "NaN"){
+           lblRecent.setText(String.valueOf(df.format(MainActivity.user.getRecentAverage())));
+       }
 
         //Links the back button to corresponding GUI element and takes the user back to the home screen
         btnBackFromStats = findViewById(R.id.btnBackFromStats);
